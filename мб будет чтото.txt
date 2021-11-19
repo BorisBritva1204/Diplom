@@ -1,0 +1,31 @@
+<?php
+$query1 = "SELECT id, username, admORuser FROM admin";
+$result1 = mysqli_query($link, $query1);
+while ($row1 = mysqli_fetch_assoc($result1)) {
+echo ' | ID = '.$row1["id"].' | ';
+echo ' Èìÿ = '.$row1["username"].' ';
+echo ' | Àäìèí = '.$row1["admORuser"].' | <br>';
+}
+
+if (!empty($_POST['owner'])) {  
+    $ressult = mysql_query("UPDATE admin SET admORuser = '$admoruser' WHERE id = '$idd'");
+    mysqli_fetch_array($ressult);
+    
+    $admoruser = $_POST["the_admin"]; 
+    $idd = $_POST["the_ID"];
+}
+?>
+<form method="POST">
+<div>
+<select name="the_ID">
+<?php foreach($result1 as $option) : ?>
+        <option value="<?php echo $option['id']; ?>"><?php echo $option['id']; ?></option>
+<?php endforeach; ?>
+</select>
+<select name="the_admin">
+    <option>admin</option>
+    <option>user</option>
+</select>
+<input type="submit" name="owner" value="Âûäàòü">
+</div>
+</form>
